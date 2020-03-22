@@ -2,7 +2,20 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
+// const axios = require('axios')
 
+axios.get("https://api.github.com/users/MichaelS42")
+.then(function (response) {
+  //handle success
+  console.log(response);
+})
+.catch(function (error) {
+  //handle error
+  console.log(error);
+})
+.then(function () {
+
+})
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
    data in order to use it to build your component function 
@@ -45,6 +58,52 @@ const followersArray = [];
 </div>
 
 */
+function createCard(obj){
+  const card = document.createElement('div');
+  const profImg = document.createElement('img');
+  const cardInfo = document.createElement('div');
+  const name = document.createElement('h3');
+  const userName = document.createElement('p');
+  const location = document.createElement('p');
+  const prof = document.createElement('p');
+  const gitHubAddress = document.createElement('a');
+  const followers = document.createElement('p');
+  const following = document.createElement('p');
+  const bio = document.createElement('p');
+
+  card.appendChild(profImg);
+  card.appendChild(cardInfo);
+  cardInfo.appendChild(name);
+  cardInfo.appendChild(userName);
+  cardInfo.appendChild(location);
+  cardInfo.appendChild(prof);
+  cardInfo.appendChild(followers);
+  cardInfo.appendChild(following);
+  cardInfo.appendChild(bio);
+  prof.appendChild(gitHubAddress);
+
+  card.classList.add('card')
+  cardInfo.classList.add('card-info')
+  name.classList.add('name')
+  userName.classList.add('username')
+
+
+profImg.src = gitData.avatar_url;
+name.textContent = gitData.name;
+userName.textContent = gitData.login;
+location.textContent = `location ${gitData.location}`;
+gitHubAddress.href = gitData.html_url;
+gitHubAddress.textContent = gitData.html_url;
+prof.textContent = "profile ";
+followers.textContent = `followers ${gitData.followers}`;
+following.textContent = `following ${gitData.following}`;
+bio.textContent = `bio ${gitData.bio}`;
+
+return card;
+
+
+}
+
 
 /* List of LS Instructors Github username's: 
   tetondan
